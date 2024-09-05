@@ -119,5 +119,3 @@ Additional Animations: I’m considering adding further animations or visual eff
 
 Frontend Mentor: For providing great challenges to improve frontend skills.
 MDN Web Docs: For always having detailed explanations and examples of CSS and JavaScript concepts.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
