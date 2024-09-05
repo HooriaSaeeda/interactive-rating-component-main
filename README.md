@@ -33,7 +33,7 @@ Interactive Rating Component Design(Thanky you state)
 ### Links
 
 - Solution URL: [https://github.com/hoor23/interactive-rating-component-main.git](https://github.com/hoor23/interactive-rating-component-main.git)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [ https://hoor23.github.io/interactive-rating-component-main/]( https://hoor23.github.io/interactive-rating-component-main/)
 
 ## My process
 
