@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Interactive rating component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap');
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+   body{
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: "Overpass", sans-serif;
+      background-color: hsl(216, 12%, 8%);
+      color: hsl(0, 0%, 100%);
+    
+    }
+     .rating-state, .thanku-state{
+      max-width: 304px;
+    background-color: hsl(213, 19%, 18%);
+    border-radius: 24px;
+    padding: 2rem 0.8rem 2rem 1.9rem;
+    }
+    .thanku-state{
+      padding-right:1.9rem ;
+    }
+
+    .card_title{
+      margin-bottom: 0;
+      font-weight: 700;
+    }
+    .card-description{
+      color: hsl(216, 12%, 54%);
+      font-weight: 400;
+      margin-top: 0.6rem;
+    }
+    .star_icon_container
+    {
+      width: 20px;
+    height: 18px;
+    background: hsl(217deg 12% 63% / 21%);
+    border-radius: 50%;
+    padding: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+    .rating_container{
+      display: flex;
+      gap: 1.4rem;
+    }
+    .rating{
+      width: 20px;
+    height: 18px;
+    background: hsl(217deg 12% 63% / 21%);
+    border-radius: 50%;
+    padding: 0.8rem;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    }
+    .button_wrapper button{
+      width: 100%;
+    padding: 0.6rem;
+    background:  hsl(25, 97%, 53%);
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    color: hsl(0, 0%, 100%);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    }
+    .button_wrapper button:hover{
+      background-color: hsl(0, 0%, 100%);
+      color: hsl(25, 97%, 53%);
+    }
+    .button_wrapper{
+      padding: 1.5rem 0.8rem 0rem 0rem;
+    }
+    .rating_hover,.orange_back{
+      background:hsl(25, 97%, 53%) ;
+    }
+    .previous_ratin_btn{
+      background: hsl(217, 12%, 63%);
+    }
+    .thanku-state{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .thanku_rate_selected{
+      background: hsl(217deg 12% 63% / 21%);
+    border-radius: 20px;
+    padding: 0.3rem 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: hsl(25, 97%, 53%);
+    }
+    .inactive_state{
+      display: none;
+    }
+  
+    .rating-state, .thanku-state {
+      transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+    .flip-out {
+  transform: rotateY(180deg);
+  opacity: 0;
+}
+
+.flip-in {
+  transform: rotateY(0deg);
+  opacity: 1;
+}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="rating-state">
+      <picture class="star_icon_container">
+        <img src="./images/icon-star.svg" alt="icon-star">
+      </picture>
+     <h2 class="card_title">How did we do?</h2>
+     <p class="card-description"> Please let us know how we did with your support request. All feedback is appreciated 
+      to help us improve our offering!</p>
+      <div class="rating_container">
+        <span class="rating">1</span>
+        <span class="rating">2</span>
+        <span class="rating">3</span>
+        <span class="rating">4</span>
+        <span class="rating">5</span>
+      </div>
+      <div class="button_wrapper"><button>Submit</button></div>
+   
+    </div>
+    <div class="thanku-state inactive_state">
+      <picture class="illustration-thank-you">
+        <img src="./images/illustration-thank-you.svg" alt="illustration-thank-you">
+      </picture>
+      <div class="thanku_rate_selected"> You selected <span class="selected_rating"></span> out of 5</div>
+     <h2 class="card_title">Thank you </h2>
+     <p class="card-description"> We appreciate you taking the time to give a rating. If you ever need more support, 
+      don’t hesitate to get in touch!</p>
+   
+    </div>
+    
+  </main>
+
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+  <script>
+    const rating_number = document.querySelectorAll(".rating_container span");
+    const rating_state= document.querySelector(".rating-state");
+    const thanku_state= document.querySelector(".thanku-state");
+    const selected_rating = document.querySelector(".selected_rating");
+    rating_number.forEach(function (rate, rate_index) {
+      
+        rate.addEventListener("mouseenter", function () {
+        rate.classList.add('rating_hover');
+        if(rate.previousElementSibling){
+          rate.previousElementSibling.classList.add('previous_ratin_btn');
+        }
+        });
+        rate.addEventListener("mouseleave", function () {
+        rate.classList.remove('rating_hover');
+       
+        if(rate.previousElementSibling){
+          rate.previousElementSibling.classList.remove('previous_ratin_btn');
+        }
+        });
+    });
+    rating_number.forEach(function (rate, rate_index) {
+    rate.addEventListener("click", function () {
+  
+      selected_rating.innerHTML = rate.innerHTML;
+      // rate.classList.add('orange_back');
+      rating_number.forEach(function (rate) {
+                rate.classList.remove("orange_back");
+            });
+            rate.classList.add('orange_back');
+   
+ console.log("clicked");
+        });
+      });
+      document.querySelector("button").addEventListener('click', function(){
+  rating_state.classList.add('flip-out');
+  setTimeout(() => {
+      rating_state.classList.add('inactive_state');
+      rating_state.classList.remove('flip-out'); // Reset the flip
+      thanku_state.classList.remove('inactive_state');
+      thanku_state.classList.add('flip-in');
+    }, 500); // Timeout matches the transition duration
+
+      });
+   
+  </script>
+</body>
+</html>
